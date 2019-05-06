@@ -1,5 +1,8 @@
 language: node_js
 
+env:
+  - YARN_GPG=no
+
 os:
   - linux
   - osx
