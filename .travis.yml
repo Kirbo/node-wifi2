@@ -3,11 +3,6 @@ language: node_js
 env:
   - YARN_GPG=no
 
-os:
-  - linux
-  - osx
-  - windows
-
 stages:
   - test
   - build
@@ -18,12 +13,17 @@ node_js:
 jobs:
   include:
     - stage: test
+      os:
+        - linux
+        - osx
+        - windows
       name: "Lint/Test"
       script:
         - yarn lint
         - yarn test
 
     - stage: build
+      os: linux
       name: "Build"
       script:
         - yarn build
