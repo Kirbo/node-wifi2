@@ -11,21 +11,22 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "lib": [
-      "es2017"
+      "es2017",
     ],
     "paths": {
       "*": [
-        "types/*"
-      ]
-    }
+        "types/*",
+      ],
+    },
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
   ],
   "exclude": [
     "dist",
     "node_modules",
     "typings",
-    "tmp"
-  ]
+    "tmp",
+    "src/**/*.test.ts",
+  ],
 }
