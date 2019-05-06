@@ -13,11 +13,16 @@ node_js:
 jobs:
   include:
     - stage: test
-      os:
-        - linux
-        - osx
-        - windows
       name: "Lint/Test"
+    - os: linux
+      script:
+        - yarn lint
+        - yarn test
+    - os: osx
+      script:
+        - yarn lint
+        - yarn test
+    - os: windows
       script:
         - yarn lint
         - yarn test
