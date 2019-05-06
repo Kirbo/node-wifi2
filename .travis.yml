@@ -18,8 +18,6 @@ node_js:
 jobs:
   include:
     - stage: test
-      script: yarn lint
-    - script: yarn test
-
+      script: yarn lint && yarn test
     - stage: build
       script: yarn build
