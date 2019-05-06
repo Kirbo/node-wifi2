@@ -1,15 +1,12 @@
 module.exports = {
-  bail: true,
+  bail: false,
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/?(**/)*.[jt]s',
+    // 'src/?(**/)*.[jt]s',
+    'src/*.[jt]s',
   ],
   coverageDirectory: 'coverage',
-  coveragePathIgnorePatterns: [
-    '/src/config/',
-    '/src/posti.js',
-    '/src/index.js',
-  ],
+  coveragePathIgnorePatterns: [],
   coverageReporters: [
     'text',
     'html',
@@ -21,5 +18,6 @@ module.exports = {
   testURL: 'http://localhost/',
   testPathIgnorePatterns: [
     '/node_modules/',
+    '/dist/',
   ],
 };

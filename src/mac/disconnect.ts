@@ -14,7 +14,7 @@ const disconnectFromWifi = (config: WifiConfig) => (
       iface = config.iface.toString();
     }
 
-    exec(`sudo ${airport} '${iface}' -z`, { env }, (error, resp, stderr) => {
+    exec(`${airport} '${iface}' -z`, { env }, (error, resp, stderr) => {
       if (error) {
         throw error;
       } else if (stderr) {

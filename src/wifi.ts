@@ -13,6 +13,7 @@ const platforms = {
 };
 
 class Wifi {
+  public os: string = process.platform;
   private platform: WifiWrapper;
   private initialised: boolean = false;
   private config: WifiConfig = {
@@ -20,15 +21,16 @@ class Wifi {
     iface: null,
   };
 
-  public init(config: WifiConfig = {}) {
+  public init(config: WifiConfig = {}, proc: any = process) {
     try {
-      this.platform = platforms[process.platform || 'default']();
+      this.platform = platforms[proc.platform || 'default']();
+      this.os = proc.platform;
       this.initialised = true;
       this.config = config;
 
       return this.platform;
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   }
 
@@ -37,7 +39,7 @@ class Wifi {
       this.isInitialised();
       return this.platform.scan(this.config);
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   }
 
@@ -46,7 +48,7 @@ class Wifi {
       this.isInitialised();
       return this.platform.getCurrentConnections(this.config);
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   }
 
@@ -55,7 +57,7 @@ class Wifi {
       this.isInitialised();
       return this.platform.connectToWifi(this.config, accessPoint);
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   }
 
@@ -64,7 +66,7 @@ class Wifi {
       this.isInitialised();
       return this.platform.deleteConnection(this.config, accessPoint);
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   }
 
@@ -73,7 +75,7 @@ class Wifi {
       this.isInitialised();
       return this.platform.disconnectFromWifi(this.config);
     } catch (error) {
-      return error;
+      throw new Error(error);
     }
   }
 
