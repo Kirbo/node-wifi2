@@ -1,7 +1,7 @@
 import { WifiConfig } from 'node-wifi2';
 import { exec } from 'child_process';
 
-import { normalizeBssid } from '../helpers';
+import { qualityFromDB, frequencyFromChannel, normalizeBssid } from '../network-utils';
 import networkUtils from '../network-utils';
 import env from '../env';
 
@@ -17,7 +17,7 @@ const parseAirport = (stdout: string) => {
   lines.forEach((line: string) => {
     if (line.match(/[ ]*agrCtlRSSI: (.*)/)) {
       connection.signal_level = parseInt(line.match(/[ ]*agrCtlRSSI: (.*)/)[1], 10);
-      connection.quality = networkUtils.qualityFromDB(line.match(/[ ]*agrCtlRSSI: (.*)/)[1]);
+      connection.quality = qualityFromDB(line.match(/[ ]*agrCtlRSSI: (.*)/)[1]);
     } else if (line.match(/[ ]*BSSID: ([a-zA-Z0-1:]*)/)) {
       const bssid = line.match(/[ ]*BSSID: ([0-9A-Fa-f:]*)/)[1];
       connection.mac = normalizeBssid(bssid);
@@ -29,7 +29,7 @@ const parseAirport = (stdout: string) => {
       connection.security_flags = [];
     } else if (line.match(/[ ]*channel: (.*)/)) {
       connection.channels = parseInt(line.match(/[ ]*channel: (.*)/)[1].split(',')[0], 10);
-      connection.frequency = parseInt(networkUtils.frequencyFromChannel(line.match(/[ ]*channel: (.*)/)[1].split(',')[0]), 10);
+      connection.frequency = parseInt(frequencyFromChannel(line.match(/[ ]*channel: (.*)/)[1].split(',')[0]), 10);
       connections.push(connection);
       connection = {};
     }

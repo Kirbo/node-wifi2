@@ -1,8 +1,7 @@
 import { WifiConfig } from 'node-wifi2';
 import { exec } from 'child_process';
 
-import { normalizeBssid } from '../helpers';
-import networkUtils from '../network-utils';
+import { dBFromQuality, normalizeBssid } from '../network-utils';
 import env from '../env';
 
 import { nmcli } from './_constants';
@@ -26,7 +25,7 @@ const parse = (config: WifiConfig, scanResults: string) => {
           mode: fields[3].replace(/\&\&/g, ':'),
           channel: parseInt(fields[4].replace(/\&\&/g, ':'), 10),
           frequency: parseInt(fields[5].replace(/\&\&/g, ':'), 10),
-          signal_level: networkUtils.dBFromQuality(fields[6].replace(/\&\&/g, ':')),
+          signal_level: dBFromQuality(fields[6].replace(/\&\&/g, ':')),
           quality: parseFloat(fields[6].replace(/\&\&/g, ':')),
           security: fields[7].replace(/\&\&/g, ':'),
           security_flags: {

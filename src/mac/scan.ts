@@ -1,8 +1,7 @@
 import { WifiConfig } from 'node-wifi2';
 import { exec } from 'child_process';
 
-import { normalizeBssid } from '../helpers';
-import networkUtils from '../network-utils';
+import { dBFromQuality, frequencyFromChannel, normalizeBssid } from '../network-utils';
 import env from '../env';
 
 import { airport } from './_constants';
@@ -32,9 +31,9 @@ export const parseAirport = (terms: any, str: any) => {
       bssid,
       ssid: lines[i].substr(0, colMac).trim(),
       channel: parseInt(lines[i].substr(colChannel, colHt - colChannel), 10),
-      frequency: parseInt(networkUtils.frequencyFromChannel(lines[i].substr(colChannel, colHt - colChannel).trim()), 10),
+      frequency: parseInt(frequencyFromChannel(lines[i].substr(colChannel, colHt - colChannel).trim()), 10),
       signal_level: lines[i].substr(colRssi, colChannel - colRssi).trim(),
-      quality: networkUtils.dBFromQuality(lines[i].substr(colRssi, colChannel - colRssi).trim()),
+      quality: dBFromQuality(lines[i].substr(colRssi, colChannel - colRssi).trim()),
       security,
       security_flags: securityFlags,
     });
