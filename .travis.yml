@@ -5,6 +5,11 @@ os:
   - osx
   - windows
 
+stages:
+  - install
+  - test
+  - build
+
 jobs:
   include:
     - stage: install
@@ -14,5 +19,5 @@ jobs:
       script: yarn lint
       script: yarn test
 
-    - stage: compile
+    - stage: build
       script: yarn compile
