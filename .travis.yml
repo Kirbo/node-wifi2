@@ -10,14 +10,20 @@ stages:
   - test
   - build
 
+node_js:
+  - "8"
+
 jobs:
   include:
     - stage: install
-      script: yarn
+      scripts:
+        - yarn
 
     - stage: test
-      script: yarn lint
-      script: yarn test
+      scripts:
+        - yarn lint
+        - yarn test
 
     - stage: build
-      script: yarn compile
+      scripts:
+        - yarn compile
