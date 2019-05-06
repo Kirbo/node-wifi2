@@ -10,7 +10,7 @@
     "url": "git://github.com/kirbo/node-wifi2.git"
   },
   "scripts": {
-    "compile": "tsc",
+    "build": "tsc",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "test": "echo 'yeaaaaah'"
   },
